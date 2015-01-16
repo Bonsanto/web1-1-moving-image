@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+<img draggable="false" src="URU.gif" alt="Logo URU" style="position: absolute; left: 0; top: 0"/>
+</body>
+<script>
+	var img = document.querySelector("img");
+	var speed = 15;
+
+	document.onkeydown = function (event) {
+		// 37 left, 38 up, 39 right, 40 down
+		switch (document.all ? event.keyCode : event.which) {
+			case 37:
+				img.style.left = parseInt(img.style.left) - speed + "px";
+				break;
+			case 38:
+				img.style.top = parseInt(img.style.top) - speed + "px";
+				break;
+			case 39:
+				img.style.left = parseInt(img.style.left) + speed + "px";
+				break;
+			case 40:
+				img.style.top = parseInt(img.style.top) + speed + "px";
+				break;
+		}
+	};
+
+	document.onclick = function (event) {
+		img.style.left = event.pageX - parseInt(img.width) / 2 + "px";
+		img.style.top = event.pageY - parseInt(img.height) / 2 + "px";
+	};
+
+	img.onmousedown = function (event) {
+		//Cause it works exactly the same as onclick.
+		this.onmousemove = document.onclick;
+
+		this.onmouseup = function (event) {
+			this.onmousemove = null;
+		};
+	};
+</script>
+</html>
